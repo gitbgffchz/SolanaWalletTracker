@@ -1,0 +1,16 @@
+version: "3"
+services:
+  solana_wallet_tracker:
+    image: derzwerggimli/solana-discord-tracker:latest
+    environment:
+      RUST_LOG: "warn"
+
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/config.json
+      - ./wallet_config.json:/wallet_config.json
+      - /etc/localtime:/etc/localtime:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
